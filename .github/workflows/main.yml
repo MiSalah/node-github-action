@@ -1,4 +1,4 @@
-name: Build Develop Branch
+name: Node.js CI
 
 on:
   push:
@@ -8,34 +8,18 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [v19.7.0]
-
+    runs-on: self-hosted
+  
     steps:
-    - name: Code Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install server
-      run: npm install
-      working-directory: /
-      
-    - name: npm install pm2
-      run: npm install pm2 -g
-      
-    - name: start server 
-      run: pm2 start index.js
-      
-    - name: npm install client
-      run: npm install 
-      working-directory: client
-      
-    - name: client start
-      run: npm start &
-      working-directory: client
+    - run: |
+        sudo npm i
+        sudo pm2 start server/index.js
+        cd client
+        sudo npm i
+        sudo npm run build      
+        sudo systemctl nginx restart
