@@ -17,11 +17,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-        pwd
-        whoami
-#        sudo npm i
-#        sudo pm2 start server/index.js
-#        cd client
-#        sudo npm i
-#        sudo npm run build      
-#        sudo systemctl nginx restart
+        sudo npm i
+        sudo pm2 start server/index.js
+        cd client
+        npm i
+        npm run build      
+        sudo systemctl nginx restart
