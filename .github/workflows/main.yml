@@ -17,8 +17,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-        sudo npm i
-        sudo pm2 start server/index.js
+        npm i
+        pm2 start server/index.js
         cd client
         npm i
         npm run build      
