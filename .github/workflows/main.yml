@@ -7,10 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
       - run: yarn install
       - run: yarn build
-      - uses: actions/manual-approval@v1
+      - uses: trstringer/manual-approval@v1.9.0
         with:
           approvers: MiSalah
